@@ -1,11 +1,11 @@
 import React from 'react';
-import BoxLastPost from "../BoxLastPost/boxlastpost"
+import BoxLastPost from "../BoxLastPost/boxlastpost";
 
 const App: React.FC = () => {
     return (
-        <div className="px-4 md:px-12 lg:px-36 flex h-screen p-4">
+        <div className="px-4 md:px-12 lg:px-36 flex flex-col md:flex-row h-screen p-4 space-y-4 md:space-y-0 md:space-x-4">
             {/* Sidebar */}
-            <div className="w-full md:w-1/4 bg-white rounded-lg shadow-md p-4 space-y-4">
+            <div className="w-full md:w-1/4 bg-white rounded-lg shadow-md p-4 space-y-4 border-2 border-gray-300 order-2 md:order-1">
                 <div className="flex items-center justify-center h-20 bg-blue-200 rounded-lg">
                     <span className="text-2xl font-semibold">2</span>
                 </div>
@@ -18,8 +18,8 @@ const App: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="w-full md:flex-1 bg-white rounded-lg shadow-md p-4 ml-4 space-y-2 ">
-                {/* کارت‌ها */}
+            <div className="w-full md:flex-1 bg-white rounded-lg shadow-md p-4 space-y-4 border-2 border-gray-300 order-1 md:order-2">
+                {/* Cards */}
                 <BoxLastPost
                     title="عنوان کارت اول"
                     description="توضیحات مربوط به کارت اول"
