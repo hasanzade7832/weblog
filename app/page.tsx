@@ -1,7 +1,7 @@
 import Header from "@/components/Header/header";
 import Slider from "@/components/Slider/slider";
 import ImageGrid from "@/components/ImageGrid/imagegrid";
-import MainLastPost from "@/components/MainLastPost/mainLastPost";
+import MainLastPost from "@/components/MainLastPost/Main/mainLastPost";
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
       <div className="mt-10">
         <ImageGrid />
       </div>
-      <div className="mt-60 md:mt-40 lg:mt-10">
+      <div className="-mt-10 md:mt-40 lg:mt-10">
         <MainLastPost />
       </div>
     </>
