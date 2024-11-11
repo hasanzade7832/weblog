@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import DragItem from "../adminTest/dragitems";
 
-const MainContent = () => {
+const MainContent = ({
+  buttonType,
+  inputType,
+  onButtonClick,
+  onInputClick,
+}) => {
   const [showMainPlus, setShowMainPlus] = useState(true);
   const [showRectangles, setShowRectangles] = useState(false);
   const [plusCount, setPlusCount] = useState(0);
@@ -16,11 +21,8 @@ const MainContent = () => {
   }, []);
 
   useEffect(() => {
-    // ذخیره اطلاعات در لوکال استوریج هر بار که items یا plusCount تغییر کند
     localStorage.setItem("items", JSON.stringify(items));
     localStorage.setItem("plusCount", plusCount);
-    console.log("Saved items to local storage:", items);
-    console.log("Saved plusCount to local storage:", plusCount);
   }, [items, plusCount]);
 
   const handleMainPlusClick = () => {
@@ -35,13 +37,11 @@ const MainContent = () => {
     setItems(Array(2).fill(null));
     localStorage.removeItem("items");
     localStorage.removeItem("plusCount");
-    console.log("Reset items and plusCount, removed from local storage");
   };
 
   const handleRectangleClick = (count) => {
     setPlusCount(count);
     setShowRectangles(false);
-    console.log("Rectangle clicked, set plusCount to:", count);
   };
 
   const handleDrop = (e, index) => {
@@ -51,13 +51,27 @@ const MainContent = () => {
     newItems[index] = type;
     setItems(newItems);
     setHoveredIndex(null);
-    console.log("Dropped item:", type, "at index:", index);
     localStorage.setItem("savedItems", JSON.stringify(newItems));
   };
 
   const handleDragOver = (e) => e.preventDefault();
   const handleDragEnter = (index) => setHoveredIndex(index);
   const handleDragLeave = () => setHoveredIndex(null);
+
+  const getButtonStyle = () => {
+    switch (buttonType) {
+      case "info":
+        return { backgroundColor: "blue", color: "white" };
+      case "success":
+        return { backgroundColor: "green", color: "white" };
+      case "warning":
+        return { backgroundColor: "orange", color: "white" };
+      case "danger":
+        return { backgroundColor: "red", color: "white" };
+      default:
+        return { backgroundColor: "gray", color: "white" };
+    }
+  };
 
   return (
     <div
@@ -138,6 +152,9 @@ const MainContent = () => {
             {[...Array(plusCount)].map((_, index) => (
               <div
                 key={index}
+                onClick={() =>
+                  items[index] === "button" ? onButtonClick() : onInputClick()
+                }
                 onDrop={(e) => handleDrop(e, index)}
                 onDragOver={handleDragOver}
                 onDragEnter={() => handleDragEnter(index)}
@@ -158,9 +175,28 @@ const MainContent = () => {
                   cursor: "pointer",
                   fontSize: "24px",
                   padding: "10px",
+                  ...(items[index] === "button" ? getButtonStyle() : {}),
                 }}
               >
-                {items[index] ? <DragItem type={items[index]} /> : "+"}
+                {items[index] === "input" ? (
+                  <input
+                    type={inputType} // Setting the input type dynamically
+                    placeholder="Enter text"
+                    style={{
+                      padding: "5px",
+                      border: "1px solid #ddd", // Adding border for clarity
+                      outline: "none",
+                      borderRadius: "4px",
+                      width: "100%", // To fit well in the container
+                    }}
+                  />
+                ) : items[index] === "button" ? (
+                  <button style={{ padding: "5px 10px", ...getButtonStyle() }}>
+                    Button
+                  </button>
+                ) : (
+                  "+"
+                )}
               </div>
             ))}
           </div>

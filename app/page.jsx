@@ -21,51 +21,61 @@
 //     </>
 //   );
 // }
-
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import Sidebar from "../components/adminTest/sidebar";
 import MainContent from "../components/adminTest/mainbar";
-import DragItem from "../components/adminTest/dragitems";
 import Link from "next/link";
 
 const Home = () => {
-  const [items, setItems] = useState([]);
+  const [buttonType, setButtonType] = useState("default");
+  const [inputType, setInputType] = useState("text");
+  const [configType, setConfigType] = useState(null);
 
   const handleDragStart = (e, type) => {
     e.dataTransfer.setData("drag-item-type", type);
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const type = e.dataTransfer.getData("drag-item-type");
-    setItems((prevItems) => [...prevItems, { id: prevItems.length, type }]);
+  const handleSelectButtonType = (type) => {
+    setButtonType(type);
+    localStorage.setItem("buttonType", type);
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
+  const handleSelectInputType = (type) => {
+    setInputType(type);
+    localStorage.setItem("inputType", type);
   };
 
-  // تابع برای ذخیره داده‌ها در localStorage هنگام کلیک روی دکمه
-  const handleSaveToLocalStorage = () => {
-    localStorage.setItem("savedItems", JSON.stringify(items));
-    console.log("Items saved to localStorage:", items);
+  const handleButtonClick = () => {
+    setConfigType("button");
+  };
+
+  const handleInputClick = () => {
+    setConfigType("input");
+  };
+
+  const handleCloseConfig = () => {
+    setConfigType(null);
   };
 
   return (
     <div style={{ display: "flex", height: "100vh" }}>
-      <Sidebar onDragStart={handleDragStart} />
-      <MainContent onDrop={handleDrop} onDragOver={handleDragOver}>
-        {items.map((item) => (
-          <DragItem key={item.id} type={item.type} />
-        ))}
-      </MainContent>
+      <Sidebar
+        onDragStart={handleDragStart}
+        onSelectButtonType={handleSelectButtonType}
+        onSelectInputType={handleSelectInputType}
+        configType={configType}
+        onClose={handleCloseConfig}
+      />
+      <MainContent
+        buttonType={buttonType}
+        inputType={inputType}
+        onButtonClick={handleButtonClick}
+        onInputClick={handleInputClick}
+      />
       <div style={{ padding: "10px", textAlign: "center" }}>
         <Link href="/output">
-          <button
-            onClick={handleSaveToLocalStorage}
-            style={{ padding: "10px 20px", marginTop: "20px" }}
-          >
+          <button style={{ padding: "10px 20px", marginTop: "20px" }}>
             Save & View Output
           </button>
         </Link>
