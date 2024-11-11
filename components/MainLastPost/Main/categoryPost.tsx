@@ -75,7 +75,7 @@ const CardList: React.FC = () => {
       {categories.map((category, index) => (
         <div key={index} className="w-full mb-4">
           {/* دسته‌بندی */}
-          <div className="flex items-center justify-end bg-gray-100 rounded-full p-3 shadow-sm mb-4 -mt-12">
+          <div className="flex items-center justify-end bg-gray-100 rounded-full p-3 shadow-sm mb-4 ">
             <span className="text-gray-800 font-medium mr-2">{category.name}</span>
             <span className="text-gray-500">
               <i className={category.iconClass}></i>
