@@ -33,14 +33,14 @@ const App: React.FC = () => {
     ];
 
     return (
-        <div className="px-4 md:px-12 lg:px-36 flex flex-col md:flex-row p-4 space-y-4 md:space-y-0 md:space-x-4 items-start">
+        <div className="w-full flex flex-col md:flex-row p-4 md:p-12 lg:p-16 space-y-4 md:space-y-0 md:space-x-4 items-start">
             {/* Sidebar */}
             <div className="w-full md:w-1/4 bg-gray-200 rounded-3xl shadow-xl shadow-gray-300 p-4 space-y-4 order-2 md:order-1">
                 <div className="flex items-center justify-center bg-white rounded-3xl shadow-md p-4">
                    <SearchSide />
                 </div>
                 <div className="flex items-center justify-center bg-white rounded-3xl shadow-md p-4">
-                    <NewestPosts posts={postsData}/> 
+                    <NewestPosts posts={postsData}/>
                 </div>
                 <div className="flex items-center justify-center bg-white rounded-3xl shadow-md p-4">
                     <Categories/>
@@ -93,6 +93,18 @@ const App: React.FC = () => {
                         { label: 'خبر', icon: '📰', color: 'bg-teal-500', hoverColor: 'hover:bg-teal-600' },
                     ]}
                 />
+                <BoxLastPost
+                    title="عنوان کارت چهارم"
+                    description="توضیحات مربوط به کارت چهارم"
+                    imageUrl='/image/flower6.webp'
+                    buttons={[
+                        { label: 'ویراستار', icon: '👤', color: 'bg-red-500', hoverColor: 'hover:bg-red-600' },
+                        { label: '3 ماه پیش', icon: '📅', color: 'bg-gray-300', hoverColor: 'hover:bg-gray-400' },
+                        { label: 'خبر', icon: '📰', color: 'bg-teal-500', hoverColor: 'hover:bg-teal-600' },
+                    ]}
+                />
+              
+                
             </div>
         </div>
     );

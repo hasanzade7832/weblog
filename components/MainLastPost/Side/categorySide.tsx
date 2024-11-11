@@ -4,11 +4,9 @@ import { FaTag } from 'react-icons/fa'; // آیکون نمونه برای دست
 const LatestTopics = () => {
     const topics = [
         "آموزش",
-        "اخبار",
         "اینترنت",
         "فناوری",
         "موبایل",
-        "نرم‌افزارها",
     ];
 
     return (
