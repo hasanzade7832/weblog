@@ -21,16 +21,17 @@
 //     </>
 //   );
 // }
+
 "use client";
 import React, { useState } from "react";
 import Sidebar from "../components/adminTest/sidebar";
 import MainContent from "../components/adminTest/mainbar";
-import Link from "next/link";
 
 const Home = () => {
   const [buttonType, setButtonType] = useState("default");
   const [inputType, setInputType] = useState("text");
   const [configType, setConfigType] = useState(null);
+  const [generatedCode, setGeneratedCode] = useState("");
 
   const handleDragStart = (e, type) => {
     e.dataTransfer.setData("drag-item-type", type);
@@ -59,27 +60,30 @@ const Home = () => {
   };
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
-      <Sidebar
-        onDragStart={handleDragStart}
-        onSelectButtonType={handleSelectButtonType}
-        onSelectInputType={handleSelectInputType}
-        configType={configType}
-        onClose={handleCloseConfig}
-      />
-      <MainContent
-        buttonType={buttonType}
-        inputType={inputType}
-        onButtonClick={handleButtonClick}
-        onInputClick={handleInputClick}
-      />
-      <div style={{ padding: "10px", textAlign: "center" }}>
-        <Link href="/output">
-          <button style={{ padding: "10px 20px", marginTop: "20px" }}>
-            Save & View Output
-          </button>
-        </Link>
+    <div className="flex h-screen">
+      {/* Sidebar */}
+      <div className="w-1/8 bg-gray-300">
+        <Sidebar
+          onDragStart={handleDragStart}
+          onSelectButtonType={handleSelectButtonType}
+          onSelectInputType={handleSelectInputType}
+          configType={configType}
+          onClose={handleCloseConfig}
+        />
       </div>
+
+      {/* Main Content Area (no extra padding/margin) */}
+      <div className="flex-grow w-1/2 bg-white" style={{ padding: 0, margin: 0 }}>
+        <MainContent
+          buttonType={buttonType}
+          inputType={inputType}
+          onButtonClick={handleButtonClick}
+          onInputClick={handleInputClick}
+          setGeneratedCode={setGeneratedCode}
+          generatedCode={generatedCode}
+        />
+      </div>
+
     </div>
   );
 };
