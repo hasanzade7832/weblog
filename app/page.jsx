@@ -28,35 +28,31 @@ import Sidebar from "../components/adminTest/sidebar";
 import MainContent from "../components/adminTest/mainbar";
 
 const Home = () => {
-  const [buttonType, setButtonType] = useState("default");
-  const [inputType, setInputType] = useState("text");
-  const [configType, setConfigType] = useState(null);
+  const [items, setItems] = useState([]);
   const [generatedCode, setGeneratedCode] = useState("");
 
   const handleDragStart = (e, type) => {
     e.dataTransfer.setData("drag-item-type", type);
   };
 
-  const handleSelectButtonType = (type) => {
-    setButtonType(type);
-    localStorage.setItem("buttonType", type);
+  const handleDrop = (e, index) => {
+    e.preventDefault();
+    const type = e.dataTransfer.getData("drag-item-type");
+    const newItems = [...items];
+    newItems[index] = { type, buttonType: "default", inputType: "text" };
+    setItems(newItems);
   };
 
-  const handleSelectInputType = (type) => {
-    setInputType(type);
-    localStorage.setItem("inputType", type);
+  const handleButtonTypeChange = (index, type) => {
+    const updatedItems = [...items];
+    updatedItems[index].buttonType = type;
+    setItems(updatedItems);
   };
 
-  const handleButtonClick = () => {
-    setConfigType("button");
-  };
-
-  const handleInputClick = () => {
-    setConfigType("input");
-  };
-
-  const handleCloseConfig = () => {
-    setConfigType(null);
+  const handleInputTypeChange = (index, type) => {
+    const updatedItems = [...items];
+    updatedItems[index].inputType = type;
+    setItems(updatedItems);
   };
 
   return (
@@ -65,25 +61,20 @@ const Home = () => {
       <div className="w-1/8 bg-gray-300">
         <Sidebar
           onDragStart={handleDragStart}
-          onSelectButtonType={handleSelectButtonType}
-          onSelectInputType={handleSelectInputType}
-          configType={configType}
-          onClose={handleCloseConfig}
+          onButtonTypeChange={handleButtonTypeChange}
+          onInputTypeChange={handleInputTypeChange}
         />
       </div>
 
-      {/* Main Content Area (no extra padding/margin) */}
+      {/* Main Content */}
       <div className="flex-grow w-1/2 bg-white" style={{ padding: 0, margin: 0 }}>
         <MainContent
-          buttonType={buttonType}
-          inputType={inputType}
-          onButtonClick={handleButtonClick}
-          onInputClick={handleInputClick}
-          setGeneratedCode={setGeneratedCode}
+          items={items}
+          onDrop={handleDrop}
           generatedCode={generatedCode}
+          setGeneratedCode={setGeneratedCode}
         />
       </div>
-
     </div>
   );
 };
