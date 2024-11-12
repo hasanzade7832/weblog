@@ -22,46 +22,58 @@
 //   );
 // }
 
+// Home Component
 "use client";
 import React, { useState } from "react";
 import Sidebar from "../components/adminTest/sidebar";
 import MainContent from "../components/adminTest/mainbar";
 
 const Home = () => {
-  const [buttonType, setButtonType] = useState("default");
-  const [inputType, setInputType] = useState("text");
+  const [buttonTypes, setButtonTypes] = useState(Array(2).fill("default"));
+  const [inputTypes, setInputTypes] = useState(Array(2).fill("text"));
   const [configType, setConfigType] = useState(null);
   const [generatedCode, setGeneratedCode] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleDragStart = (e, type) => {
     e.dataTransfer.setData("drag-item-type", type);
   };
 
   const handleSelectButtonType = (type) => {
-    setButtonType(type);
-    localStorage.setItem("buttonType", type);
+    if (selectedIndex !== null) {
+      const newButtonTypes = [...buttonTypes];
+      newButtonTypes[selectedIndex] = type;
+      setButtonTypes(newButtonTypes);
+      localStorage.setItem("buttonTypes", JSON.stringify(newButtonTypes));
+    }
   };
 
   const handleSelectInputType = (type) => {
-    setInputType(type);
-    localStorage.setItem("inputType", type);
+    if (selectedIndex !== null) {
+      const newInputTypes = [...inputTypes];
+      newInputTypes[selectedIndex] = type;
+      setInputTypes(newInputTypes);
+      localStorage.setItem("inputTypes", JSON.stringify(newInputTypes));
+    }
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (index) => {
     setConfigType("button");
+    setSelectedIndex(index);
   };
 
-  const handleInputClick = () => {
+  const handleInputClick = (index) => {
     setConfigType("input");
+    setSelectedIndex(index);
   };
 
   const handleCloseConfig = () => {
     setConfigType(null);
+    setSelectedIndex(null);
   };
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
       <div className="w-1/8 bg-gray-300">
         <Sidebar
           onDragStart={handleDragStart}
@@ -71,19 +83,18 @@ const Home = () => {
           onClose={handleCloseConfig}
         />
       </div>
-
-      {/* Main Content Area (no extra padding/margin) */}
       <div className="flex-grow w-1/2 bg-white" style={{ padding: 0, margin: 0 }}>
         <MainContent
-          buttonType={buttonType}
-          inputType={inputType}
+          buttonTypes={buttonTypes}
+          inputTypes={inputTypes}
+          setButtonTypes={setButtonTypes} // اضافه کردن setButtonTypes
+          setInputTypes={setInputTypes}   // اضافه کردن setInputTypes
           onButtonClick={handleButtonClick}
           onInputClick={handleInputClick}
           setGeneratedCode={setGeneratedCode}
           generatedCode={generatedCode}
         />
       </div>
-
     </div>
   );
 };

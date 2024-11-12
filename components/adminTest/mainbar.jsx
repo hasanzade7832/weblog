@@ -3,17 +3,20 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const MainContent = ({
-  buttonType,
-  inputType,
+  buttonTypes,
+  inputTypes,
+  setButtonTypes, // دریافت setButtonTypes به عنوان prop
+  setInputTypes,  // دریافت setInputTypes به عنوان prop
   onButtonClick,
   onInputClick,
+  setGeneratedCode,
+  generatedCode,
 }) => {
   const [showMainPlus, setShowMainPlus] = useState(true);
   const [showRectangles, setShowRectangles] = useState(false);
   const [plusCount, setPlusCount] = useState(0);
   const [items, setItems] = useState(Array(2).fill(null));
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [generatedCode, setGeneratedCode] = useState("");
 
   useEffect(() => {
     const storedItems = localStorage.getItem("savedItems");
@@ -44,6 +47,23 @@ const MainContent = ({
   const handleRectangleClick = (count) => {
     setPlusCount(count);
     setShowRectangles(false);
+
+    // اطمینان از اینکه آرایه‌های `buttonTypes` و `inputTypes` به اندازه کافی بزرگ باشند
+    setButtonTypes((prev) => {
+      const newButtonTypes = [...prev];
+      while (newButtonTypes.length < count) {
+        newButtonTypes.push("default"); // مقدار پیش‌فرض برای دکمه‌های جدید
+      }
+      return newButtonTypes;
+    });
+
+    setInputTypes((prev) => {
+      const newInputTypes = [...prev];
+      while (newInputTypes.length < count) {
+        newInputTypes.push("text"); // مقدار پیش‌فرض برای ورودی‌های جدید
+      }
+      return newInputTypes;
+    });
   };
 
   const handleDrop = (e, index) => {
@@ -60,8 +80,9 @@ const MainContent = ({
   const handleDragEnter = (index) => setHoveredIndex(index);
   const handleDragLeave = () => setHoveredIndex(null);
 
-  const getButtonStyle = () => {
-    switch (buttonType) {
+  const getButtonStyle = (index) => {
+    const type = buttonTypes[index] || "default"; // مقدار پیش‌فرض 'default'
+    switch (type) {
       case "info":
         return { backgroundColor: "blue", color: "white" };
       case "success":
@@ -82,11 +103,11 @@ import React from 'react';
 const GeneratedComponent = () => (
   <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
     ${items
-      .map((item) => {
+      .map((item, index) => {
         if (item === "button") {
-          return `<button style={{ backgroundColor: "${getButtonStyle().backgroundColor}", color: "${getButtonStyle().color}", padding: "5px 10px" }}>Button</button>`;
+          return `<button style={{ backgroundColor: "${getButtonStyle(index).backgroundColor}", color: "${getButtonStyle(index).color}", padding: "5px 10px" }}>Button</button>`;
         } else if (item === "input") {
-          return `<input type="${inputType}" placeholder="Enter text" style={{ padding: "5px", border: "1px solid #ddd", outline: "none", borderRadius: "4px", width: "100%" }} />`;
+          return `<input type="${inputTypes[index]}" placeholder="Enter text" style={{ padding: "5px", border: "1px solid #ddd", outline: "none", borderRadius: "4px", width: "100%" }} />`;
         }
         return null;
       })
@@ -102,7 +123,6 @@ export default GeneratedComponent;
 
   return (
     <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
-      {/* Top Bar with "Save and View Output" button */}
       <div
         style={{
           width: "100%",
@@ -131,10 +151,7 @@ export default GeneratedComponent;
           Save and View Output
         </button>
       </div>
-
-      {/* Two-column layout */}
       <div style={{ display: "flex", flex: 1, marginTop: "50px" }}>
-        {/* Main Content Column - Left Side (70% width) */}
         <div
           style={{
             width: "70%",
@@ -172,7 +189,6 @@ export default GeneratedComponent;
             >
               Generate Code
             </button>
-
             {showMainPlus && (
               <span
                 onClick={handleMainPlusClick}
@@ -181,7 +197,6 @@ export default GeneratedComponent;
                 +
               </span>
             )}
-
             {showRectangles && (
               <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
                 <div
@@ -194,7 +209,6 @@ export default GeneratedComponent;
                     cursor: "pointer",
                   }}
                 ></div>
-
                 <div
                   onClick={() => handleRectangleClick(1)}
                   style={{
@@ -206,7 +220,6 @@ export default GeneratedComponent;
                 ></div>
               </div>
             )}
-
             {!showMainPlus && (
               <button
                 onClick={handleReset}
@@ -224,7 +237,6 @@ export default GeneratedComponent;
                 ×
               </button>
             )}
-
             {!showRectangles && plusCount > 0 && (
               <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
                 {[...Array(plusCount)].map((_, index) => (
@@ -232,8 +244,8 @@ export default GeneratedComponent;
                     key={index}
                     onClick={() =>
                       items[index] === "button"
-                        ? onButtonClick()
-                        : onInputClick()
+                        ? onButtonClick(index)
+                        : onInputClick(index)
                     }
                     onDrop={(e) => handleDrop(e, index)}
                     onDragOver={handleDragOver}
@@ -255,12 +267,12 @@ export default GeneratedComponent;
                       cursor: "pointer",
                       fontSize: "24px",
                       padding: "10px",
-                      ...(items[index] === "button" ? getButtonStyle() : {}),
+                      ...(items[index] === "button" ? getButtonStyle(index) : {}),
                     }}
                   >
                     {items[index] === "input" ? (
                       <input
-                        type={inputType}
+                        type={inputTypes[index]}
                         placeholder="Enter text"
                         style={{
                           padding: "5px",
@@ -272,7 +284,7 @@ export default GeneratedComponent;
                       />
                     ) : items[index] === "button" ? (
                       <button
-                        style={{ padding: "5px 10px", ...getButtonStyle() }}
+                        style={{ padding: "5px 10px", ...getButtonStyle(index) }}
                       >
                         Button
                       </button>
@@ -283,8 +295,6 @@ export default GeneratedComponent;
             )}
           </div>
         </div>
-
-        {/* Code Display Column - Right Side (30% width) */}
         <div
           style={{
             width: "30%",
