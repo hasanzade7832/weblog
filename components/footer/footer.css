@@ -6,9 +6,7 @@
   width: 200%;
   overflow: hidden;
   height: 200px;
-  display: flex; /* اضافه کردن فلکس باکس برای ترازبندی */
-  justify-content: center; /* تراز افقی */
-  align-items: center; /* تراز عمودی */
+  z-index: -1; /* برای اطمینان از اینکه زیر متن قرار بگیرد */
 }
 
 /* موج */
@@ -30,15 +28,14 @@
 
 /* متن ثابت در مرکز امواج */
 .text-on-wave {
-  position: absolute;
-  top: 50%; /* موقعیت عمودی متن */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  display: flex; /* برای فعال‌سازی فلکس‌باکس */
+  flex-direction: row; /* متن‌ها کنار هم قرار می‌گیرند */
+  justify-content: center; /* تراز افقی متن‌ها */
+  align-items: center; /* تراز عمودی متن‌ها */
   gap: 20px; /* فاصله بین متن‌ها */
+  height: 100%; /* ارتفاع به اندازه کل فوتر */
+  width: 100%; /* عرض به اندازه کل فوتر */
+  position: relative; /* موقعیت‌دهی معمولی برای هماهنگی بهتر */
 }
 
 .text-on-wave p {

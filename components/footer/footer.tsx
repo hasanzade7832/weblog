@@ -15,11 +15,11 @@ const Footer: React.FC = () => {
       </div>
 
       {/* محتوای فوتر */}
-      <div className="container mx-auto text-on-wave">
-        <p className="text-gray-200 text-md md:text-sm font-medium">
+      <div className="text-on-wave">
+        <p className="text-gray-200 text-md md:text-sm font-bold">
           تماس با ما
         </p>
-        <p className="text-gray-200 text-md md:text-sm font-medium">
+        <p className="text-gray-200 text-md md:text-sm font-bold">
           ارتباط با ما
         </p>
       </div>
