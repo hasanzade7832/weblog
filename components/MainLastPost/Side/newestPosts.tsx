@@ -4,9 +4,8 @@ import React from 'react';
 
 interface Post {
     title: string;
-    imageUrl: string;
-    timeAgo: string;
-    commentsCount: number;
+    image: string;
+    date: string;
 }
 
 interface LatestPostsProps {
@@ -30,7 +29,7 @@ const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {
                     >
                         {/* Post Image */}
                         <img 
-                            src={post.imageUrl} 
+                            src={post.image} 
                             alt={post.title} 
                             className="w-10 h-10 rounded-full object-cover ml-3 transition-transform duration-500 ease-in-out hover:scale-110" 
                         />

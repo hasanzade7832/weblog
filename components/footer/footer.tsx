@@ -14,12 +14,12 @@ const Footer: React.FC = () => {
         </svg>
       </div>
 
-      {/* محتویات فوتر */}
-      <div className="container mx-auto flex flex-row justify-center gap-20 text-on-wave">
-        <p className="text-gray-200 text-md md:text-lg font-medium animate-bounce">
+      {/* محتوای فوتر */}
+      <div className="container mx-auto text-on-wave">
+        <p className="text-gray-200 text-md md:text-sm font-medium">
           تماس با ما
         </p>
-        <p className="text-gray-200 text-md md:text-lg font-medium animate-bounce">
+        <p className="text-gray-200 text-md md:text-sm font-medium">
           ارتباط با ما
         </p>
       </div>

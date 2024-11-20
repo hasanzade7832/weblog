@@ -2,4 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
+/* برای اطمینان از حذف padding و margin پیش‌فرض */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+html, body {
+  height: 100%;
+}
+
+/* کل صفحه باید به صورت یک ستون نمایش داده شود */
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-geist-sans), sans-serif;
+  overflow-x: hidden; /* جلوگیری از اسکرول افقی */
+}
+
+/* هدر */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* ارتفاع هدر */
+  background-color: #fff; /* رنگ زمینه */
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* سایه اختیاری */
+}
+
+/* فوتر */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 75px; /* نصف ارتفاع قبلی */
+  background-color: #fff;
+  z-index: 1000;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* سایه اختیاری */
+}
+
+/* محتوای اصلی */
+main {
+  flex: 1;
+  margin-top: 60px; /* به اندازه هدر */
+  margin-bottom: 75px; /* به اندازه جدید فوتر */
+  padding: 20px;
+  overflow-y: auto; /* اسکرول در صورت نیاز */
+}
+
+/* ایجاد فاصله بین آخرین محتوا و فوتر */
+main > :last-child {
+  margin-bottom: 40px; /* فاصله دلخواه */
+}
+
+/* ایجاد فاصله دلخواه بین آیتم‌های پست */
+.category-post-spacing {
+  margin-bottom: 20px;
+}

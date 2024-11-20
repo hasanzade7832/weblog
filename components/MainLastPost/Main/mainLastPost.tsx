@@ -1,36 +1,24 @@
+"use client"
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import BoxLastPost from "../../BoxLastPost/boxlastpost";
 import SearchSide from "../Side/searchSide";
 import NewestPosts from "../Side/newestPosts";
 import Categories from "../Side/categorySide";
 
 const App: React.FC = () => {
+    const router = useRouter();
+
     const postsData = [
-        {
-            title: "این آخرین بروزرسانی ویندوز...",
-            imageUrl: "/image/flower6.webp",
-            timeAgo: "1 سال پیش",
-            commentsCount: 5,
-        },
-        {
-            title: "واکنش جنجالی و جالب...",
-            imageUrl: "/image/flower7.webp",
-            timeAgo: "1 سال پیش",
-            commentsCount: 8,
-        },
-        {
-            title: "حیرت انگیز مثل بروزرسانی‌های...",
-            imageUrl: "/image/flower8.webp",
-            timeAgo: "1 سال پیش",
-            commentsCount: 10,
-        },
-        {
-            title: "اخبار جدید شبکه ارتباطی",
-            imageUrl: "/image/flower9.webp",
-            timeAgo: "1 سال پیش",
-            commentsCount: 2,
-        },
+       { id: "1", title: "نحوه فعال سازی اعلان ها در وردپرس", description: "توضیح مختصر...", date: "۳۰ دی ۱۴۰۳", categoryColor: "bg-pink-200 text-pink-700", image: "/image/flower6.webp" },
+        { id: "2", title: "سبک زندگی سالم", description: "توضیح مختصر...", date: "۲۷ آبان ۱۴۰۳", categoryColor: "bg-pink-200 text-pink-700", image: "/image/flower7.webp" },
+        { id: "3", title: "تکنیک‌های بهبود خواب", description: "توضیح مختصر...", date: "۱۵ مهر ۱۴۰۳", categoryColor: "bg-pink-200 text-pink-700", image: "/image/flower8.webp" },
+        { id: "4", title: "مدیریت استرس", description: "توضیح مختصر...", date: "۱۰ تیر ۱۴۰۳", categoryColor: "bg-pink-200 text-pink-700", image: "/image/flower9.webp" },
     ];
+
+    const handlePostClick = (id: string) => {
+        router.push(`/postContent/${id}`);
+    };
 
     return (
         <div className="w-full flex flex-col md:flex-row p-4 md:p-12 lg:p-16 space-y-4 md:space-y-0 md:space-x-4 items-start">
@@ -50,61 +38,24 @@ const App: React.FC = () => {
             {/* Main Content */}
             <div className="w-full md:flex-1 rounded-3xl p-1 space-y-4 order-1 md:order-2 shadow-xl shadow-gray-300">
                 {/* Cards */}
-                <BoxLastPost
-                    title="عنوان کارت اول"
-                    description="توضیحات مربوط به کارت اول"
-                    imageUrl='/image/flower6.webp'
-                    buttons={[
-                        { label: 'مدیر سایت', icon: '👤', color: 'bg-blue-500', hoverColor: 'hover:bg-blue-600' },
-                        { label: '1 سال پیش', icon: '📅', color: 'bg-gray-300', hoverColor: 'hover:bg-gray-400' },
-                        { label: 'آموزش', icon: '📘', color: 'bg-purple-500', hoverColor: 'hover:bg-purple-600' },
-                    ]}
-                />
-
-                <BoxLastPost
-                    title="عنوان کارت دوم"
-                    description="توضیحات مربوط به کارت دوم"
-                    imageUrl='/image/flower6.webp'
-                    buttons={[
-                        { label: 'نویسنده', icon: '👤', color: 'bg-green-500', hoverColor: 'hover:bg-green-600' },
-                        { label: '6 ماه پیش', icon: '📅', color: 'bg-gray-300', hoverColor: 'hover:bg-gray-400' },
-                        { label: 'مقاله', icon: '📄', color: 'bg-yellow-500', hoverColor: 'hover:bg-yellow-600' },
-                    ]}
-                />
-
-                <BoxLastPost
-                    title="عنوان کارت سوم"
-                    description="توضیحات مربوط به کارت سوم"
-                    imageUrl='/image/flower6.webp'
-                    buttons={[
-                        { label: 'ویرایشگر', icon: '👤', color: 'bg-red-500', hoverColor: 'hover:bg-red-600' },
-                        { label: '3 ماه پیش', icon: '📅', color: 'bg-gray-300', hoverColor: 'hover:bg-gray-400' },
-                        { label: 'خبر', icon: '📰', color: 'bg-teal-500', hoverColor: 'hover:bg-teal-600' },
-                    ]}
-                />
-
-                <BoxLastPost
-                    title="عنوان کارت چهارم"
-                    description="توضیحات مربوط به کارت چهارم"
-                    imageUrl='/image/flower6.webp'
-                    buttons={[
-                        { label: 'ویراستار', icon: '👤', color: 'bg-red-500', hoverColor: 'hover:bg-red-600' },
-                        { label: '3 ماه پیش', icon: '📅', color: 'bg-gray-300', hoverColor: 'hover:bg-gray-400' },
-                        { label: 'خبر', icon: '📰', color: 'bg-teal-500', hoverColor: 'hover:bg-teal-600' },
-                    ]}
-                />
-                <BoxLastPost
-                    title="عنوان کارت چهارم"
-                    description="توضیحات مربوط به کارت چهارم"
-                    imageUrl='/image/flower6.webp'
-                    buttons={[
-                        { label: 'ویراستار', icon: '👤', color: 'bg-red-500', hoverColor: 'hover:bg-red-600' },
-                        { label: '3 ماه پیش', icon: '📅', color: 'bg-gray-300', hoverColor: 'hover:bg-gray-400' },
-                        { label: 'خبر', icon: '📰', color: 'bg-teal-500', hoverColor: 'hover:bg-teal-600' },
-                    ]}
-                />
-              
-                
+                {postsData.map((post) => (
+                    <div
+                        key={post.id}
+                        onClick={() => handlePostClick(post.id)}
+                        className="cursor-pointer bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4"
+                    >
+                        <BoxLastPost
+                            title={post.title}
+                            description={`توضیحات پست ${post.id}`}
+                            imageUrl={post.image}
+                            buttons={[
+                                { label: 'مدیر سایت', icon: '👤', color: 'bg-blue-500', hoverColor: 'hover:bg-blue-600' },
+                                { label: post.date, icon: '📅', color: 'bg-gray-300', hoverColor: 'hover:bg-gray-400' },
+                                { label: 'آموزش', icon: '📘', color: 'bg-purple-500', hoverColor: 'hover:bg-purple-600' },
+                            ]}
+                        />
+                    </div>
+                ))}
             </div>
         </div>
     );

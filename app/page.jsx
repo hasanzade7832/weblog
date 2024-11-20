@@ -7,11 +7,10 @@ import CategoryPost from "@/components/MainLastPost/Main/categoryPost";
 export default function Home() {
   return (
     <>
-      <Header />
       <Slider />
       <ImageGrid />
       <MainLastPost />
-      <CategoryPost />
+      <CategoryPost  />
     </>
   );
 }

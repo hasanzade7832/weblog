@@ -1,40 +1,49 @@
+/* ظرف موج */
 .wave-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 200%; /* عرض بیشتر برای حرکت پیوسته */
-    overflow: hidden;
-    height: 200px; /* تنظیم ارتفاع موج */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  overflow: hidden;
+  height: 200px;
+  display: flex; /* اضافه کردن فلکس باکس برای ترازبندی */
+  justify-content: center; /* تراز افقی */
+  align-items: center; /* تراز عمودی */
+}
+
+/* موج */
+.wave {
+  width: 200%;
+  height: 200px;
+  animation: waveAnimation 8s linear infinite;
+}
+
+/* انیمیشن موج */
+@keyframes waveAnimation {
+  0% {
+    transform: translateX(0);
   }
-  
-  .wave {
-    width: 200%;
-    height: 100%;
-    animation: waveAnimation 5s linear infinite; /* انیمیشن با سرعت بیشتر */
+  100% {
+    transform: translateX(-50%);
   }
-  
-  @keyframes waveAnimation {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-75%); /* حرکت سریع‌تر به چپ */
-    }
-  }
-  
-  /* متن روی امواج */
-  .text-on-wave {
-    position: absolute;
-    bottom: 80px; /* تنظیم موقعیت متن روی موج */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    animation: waveAnimation 5s linear infinite; /* همگام‌سازی انیمیشن متن با موج */
-  }
-  
-  /* جلوگیری از اسکرول افقی */
-  body {
-    overflow-x: hidden;
-  }
-  
+}
+
+/* متن ثابت در مرکز امواج */
+.text-on-wave {
+  position: absolute;
+  top: 50%; /* موقعیت عمودی متن */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* فاصله بین متن‌ها */
+}
+
+.text-on-wave p {
+  font-size: 0.9rem;
+  color: #e5e5e5;
+  font-weight: 500;
+  margin: 0;
+}
