@@ -22,7 +22,7 @@ const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {
 
             {/* Posts List */}
             <div className="space-y-4">
-                {posts.map((post, index) => (
+                {posts.slice(0, 4).map((post, index) => (
                     <div 
                         key={index} 
                         className="flex flex-row-reverse items-center text-right w-full transition-transform duration-500 ease-in-out hover:scale-105 hover:shadow-lg hover:bg-gray-100 rounded-md p-2 cursor-pointer"
