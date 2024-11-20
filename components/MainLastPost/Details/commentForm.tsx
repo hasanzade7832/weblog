@@ -20,18 +20,17 @@ const CommentForm: React.FC = () => {
 
   const handleSubmit = () => {
     console.log('Form Data:', formData)
-    // اینجا می‌توانید کد ارسال فرم را اضافه کنید
     alert('دیدگاه شما ارسال شد!')
   }
 
   return (
-    <div className='bg-gray-50 p-4 rounded-lg mt-6 shadow-md border border-gray-200'>
-      <div className='flex gap-4 flex-row-reverse mb-4'>
+    <div className='bg-gray-50 p-4 rounded-lg mt-6 shadow-md border border-gray-200 max-w-4xl mx-auto'>
+      <div className='flex flex-col md:flex-row gap-4 flex-row-reverse mb-4'>
         <input
           type='text'
           name='name'
           placeholder='نام'
-          className='border border-gray-300 rounded-lg p-2 w-full text-right'
+          className='border border-gray-300 rounded-lg p-2 w-full md:flex-1 text-right'
           value={formData.name}
           onChange={handleInputChange}
           dir='rtl'
@@ -40,7 +39,7 @@ const CommentForm: React.FC = () => {
           type='email'
           name='email'
           placeholder='ایمیل'
-          className='border border-gray-300 rounded-lg p-2 w-full text-right'
+          className='border border-gray-300 rounded-lg p-2 w-full md:flex-1 text-right'
           value={formData.email}
           onChange={handleInputChange}
           dir='rtl'
@@ -49,13 +48,13 @@ const CommentForm: React.FC = () => {
           type='text'
           name='website'
           placeholder='وبسایت'
-          className='border border-gray-300 rounded-lg p-2 w-full text-right'
+          className='border border-gray-300 rounded-lg p-2 w-full md:flex-1 text-right'
           value={formData.website}
           onChange={handleInputChange}
           dir='rtl'
         />
       </div>
-      <div className='flex items-center flex-row-reverse mb-4'>
+      <div className='flex items-center flex-row-reverse mb-4 text-right'>
         <input
           type='checkbox'
           id='saveInfo'
@@ -70,7 +69,7 @@ const CommentForm: React.FC = () => {
       </div>
       <Button
         label='ارسال دیدگاه'
-        className='p-button-outlined text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-6 py-3 mx-auto block'
+        className='p-button-outlined text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-6 py-3 mx-auto block w-full md:w-auto'
         onClick={handleSubmit}
       />
     </div>
