@@ -29,8 +29,9 @@ const Slider: React.FC = () => {
   }, [currentIndex]);
 
   return (
+    <div className="w-full px-4 md:px-12 lg:px-16">
     <div
-      className="relative w-full h-[500px] flex items-center justify-center"
+      className="relative w-full h-[500px] flex items-center justify-center rounded-3xl shadow-xl shadow-gray-300"
       style={{
         background: 'linear-gradient(135deg, #111111, #2d2d2d, #3e3e3e, #595959)',
         backgroundSize: '400% 400%',
@@ -38,7 +39,7 @@ const Slider: React.FC = () => {
       }}
     >
       {/* بخش تصویر اسلایدر */}
-      <div className="relative w-2/3 h-full overflow-hidden rounded-lg shadow-2xl">
+      <div className="relative w-full h-full overflow-hidden rounded-lg shadow-2xl">
         <img
           src={images[currentIndex]}
           alt={`Slide ${currentIndex}`}
@@ -46,15 +47,14 @@ const Slider: React.FC = () => {
           style={{
             objectFit: "cover",
             filter: "brightness(0.9) contrast(1.1)",
-            borderRadius: "10px",
           }}
         />
       </div>
-
-      {/* دکمه‌های پیمایش در کناره‌های تصویر، نزدیک به پایین */}
+  
+      {/* دکمه‌های پیمایش وسط عمودی */}
       <button
         onClick={goToPrevious}
-        className="absolute left-12 bottom-6 p-4 rounded-full bg-white bg-opacity-20 backdrop-blur-lg flex items-center justify-center transition-all duration-300 ease-in-out hover:bg-opacity-50 transform hover:scale-110"
+        className="absolute left-4 top-1/2 p-4 rounded-full bg-white bg-opacity-20 backdrop-blur-lg flex items-center justify-center transition-all duration-300 ease-in-out hover:bg-opacity-50 transform -translate-y-1/2 hover:scale-110"
         style={{
           boxShadow: '0 8px 20px rgba(0, 0, 0, 0.6)',
           border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -64,7 +64,7 @@ const Slider: React.FC = () => {
       </button>
       <button
         onClick={goToNext}
-        className="absolute left-32 bottom-6 p-4 rounded-full bg-white bg-opacity-20 backdrop-blur-lg flex items-center justify-center transition-all duration-300 ease-in-out hover:bg-opacity-50 transform hover:scale-110"
+        className="absolute right-4 top-1/2 p-4 rounded-full bg-white bg-opacity-20 backdrop-blur-lg flex items-center justify-center transition-all duration-300 ease-in-out hover:bg-opacity-50 transform -translate-y-1/2 hover:scale-110"
         style={{
           boxShadow: '0 8px 20px rgba(0, 0, 0, 0.6)',
           border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -72,7 +72,7 @@ const Slider: React.FC = () => {
       >
         <FaChevronRight className="text-3xl text-white" />
       </button>
-
+  
       {/* استایل انیمیشن گرادیان */}
       <style jsx>{`
         @keyframes gradient {
@@ -82,6 +82,10 @@ const Slider: React.FC = () => {
         }
       `}</style>
     </div>
+  </div>
+  
+
+
   );
 };
 

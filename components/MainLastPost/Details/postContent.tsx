@@ -182,7 +182,7 @@ const PostPage = () => {
     <div className='w-full flex flex-col md:flex-row p-4 md:p-12 lg:p-16 space-y-4 md:space-y-0 md:space-x-4 items-start'>
       {/* سایدبار */}
       <Sidebar posts={postsData} />
-  
+
       {/* بخش اصلی */}
       <div className='w-full md:w-2/3 flex-1 rounded-3xl p-6 space-y-4 order-1 md:order-2 shadow-xl shadow-gray-300 bg-white'>
         {/* دسته‌بندی و عنوان */}
@@ -196,7 +196,7 @@ const PostPage = () => {
             {post.title}
           </h1>
         </div>
-  
+
         {/* تصویر */}
         <div className='relative mt-2'>
           <img
@@ -205,30 +205,31 @@ const PostPage = () => {
             className='w-full h-[200px] sm:h-[300px] md:h-[500px] object-cover rounded-lg shadow-lg border border-gray-200'
           />
         </div>
-  
-       {/* اطلاعات اضافی */}
-<div className='flex flex-wrap justify-end items-center mt-6 gap-x-4 gap-y-2 text-gray-700'>
-  <div className='flex items-center gap-x-2'>
-    <span className='text-sm font-bold'>تاریخ: {post.date}</span>
-    <FaCalendarAlt className='text-blue-500' />
-  </div>
-  <div className='flex items-center gap-x-2'>
-    <span className='text-sm font-bold'>توسط: {post.author}</span>
-    <FaUser className='text-green-500' />
-  </div>
-  <div className='flex items-center gap-x-2'>
-    <span className='text-sm font-bold'>{post.views} بازدید</span>
-    <FaEye className='text-orange-500' />
-  </div>
-</div>
 
-  
+        {/* اطلاعات اضافی */}
+        <div className='flex flex-wrap justify-end items-center mt-6 gap-x-4 gap-y-2 text-gray-700'>
+          <div className='flex items-center gap-x-2'>
+            <span className='text-sm font-bold'>تاریخ: {post.date}</span>
+            <FaCalendarAlt className='text-blue-500' />
+          </div>
+          <div className='flex items-center gap-x-2'>
+            <span className='text-sm font-bold'>توسط: {post.author}</span>
+            <FaUser className='text-green-500' />
+          </div>
+          <div className='flex items-center gap-x-2'>
+            <span className='text-sm font-bold'>{post.views} بازدید</span>
+            <FaEye className='text-orange-500' />
+          </div>
+        </div>
+
         {/* خط‌چین */}
         <hr className='border-dashed border-gray-300 my-6' />
-  
+
         {/* توضیحات */}
-        <p className='mt-4 text-base sm:text-lg text-right'>{post.description}</p>
-  
+        <p className='mt-4 text-base sm:text-lg text-right'>
+          {post.description}
+        </p>
+
         {/* باکس استاتیک */}
         <div className='mt-6 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 p-6 bg-gray-100 rounded-lg shadow-lg'>
           <div className='flex-shrink-0 w-full md:w-1/4'>
@@ -247,11 +248,12 @@ const PostPage = () => {
             </p>
           </div>
         </div>
-  
+
         {/* کارت استاتیک */}
         <div className='mt-6 mx-auto w-full sm:w-3/4 lg:w-1/2 p-6 bg-white rounded-lg shadow-lg border border-gray-300 text-center transition-transform duration-300 hover:scale-105 hover:bg-gradient-to-l hover:from-pink-500 hover:via-purple-500 hover:to-indigo-500 hover:text-white'>
           <p className='text-gray-700 leading-7 italic hover:text-white'>
-            "طراحی یک محصول با تمرکز بر روی رفتارهای یک قشر از جامعه کار بسیار..."
+            "طراحی یک محصول با تمرکز بر روی رفتارهای یک قشر از جامعه کار
+            بسیار..."
           </p>
           <div className='mt-4 flex justify-between items-center'>
             <button className='px-4 py-1 bg-blue-600 text-white rounded-lg shadow-md text-sm hover:bg-blue-800 hover:text-white transition-colors duration-300'>
@@ -265,7 +267,7 @@ const PostPage = () => {
             </div>
           </div>
         </div>
-  
+
         {/* باکس جدید استاتیک */}
         <div className='mt-6 p-6 bg-gray-50 rounded-lg shadow-md'>
           <h2 className='text-lg sm:text-xl md:text-2xl font-semibold text-right mb-4'>
@@ -285,7 +287,7 @@ const PostPage = () => {
                 </li>
               ))}
             </ul>
-  
+
             {/* ستون دوم */}
             <ul className='space-y-4'>
               {['-', '-', '-', '-'].map((item, idx) => (
@@ -301,16 +303,15 @@ const PostPage = () => {
             </ul>
           </div>
         </div>
-  
+
         {/* کامپوننت برچسب‌ها */}
         <Tags />
-  
+
         {/* کامنت‌ها */}
         <Comment />
       </div>
     </div>
   )
-  
 }
 
 export default PostPage
